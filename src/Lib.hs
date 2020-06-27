@@ -1,6 +1,7 @@
 module Lib ( 
-  parseCommand,
-  Command(..)
+    parseCommand
+  , parseCommands
+  , Command(..)
 ) where
 
 data Command = 
@@ -9,8 +10,11 @@ data Command =
   | MoveForward 
   deriving (Show, Eq)
 
-parseCommand :: String -> Maybe Command
-parseCommand "L" = Just TurnLeft
-parseCommand "R" = Just TurnRight
-parseCommand "F" = Just MoveForward
+parseCommand :: Char -> Maybe Command
+parseCommand 'L' = Just TurnLeft
+parseCommand 'R' = Just TurnRight
+parseCommand 'F' = Just MoveForward
 parseCommand _ = Nothing
+
+parseCommands :: String -> [Maybe Command]
+parseCommands _ = []
