@@ -1,6 +1,12 @@
-module Lib
-    ( someFunc
-    ) where
+module Lib ( 
+  parseCommand,
+  Command(..)
+) where
 
-someFunc :: IO ()
-someFunc = putStrLn "someFunc"
+data Command = 
+    TurnLeft
+  | TurnRight
+  | MoveForward
+
+parseCommand :: String -> Maybe Command
+parseCommand str = Nothing
