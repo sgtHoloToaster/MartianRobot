@@ -1,6 +1,6 @@
 name:                MartianRobot
 version:             0.1.0.0
-github:              "githubuser/MartianRobot"
+github:              "sgtHoloToaster/MartianRobot"
 license:             BSD3
 author:              "Author name here"
 maintainer:          "example@example.com"
@@ -46,3 +46,4 @@ tests:
     - -with-rtsopts=-N
     dependencies:
     - MartianRobot
+    - hspec ==2.*

@@ -6,7 +6,8 @@ module Lib (
 data Command = 
     TurnLeft
   | TurnRight
-  | MoveForward
+  | MoveForward 
+  deriving (Show, Eq)
 
 parseCommand :: String -> Maybe Command
 parseCommand str = Nothing

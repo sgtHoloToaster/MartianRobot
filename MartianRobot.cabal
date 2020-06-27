@@ -4,13 +4,13 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 1a96dfdd9a9ca74e88a5b6070597e1dd77433380d974cf2576a8897590a19a51
+-- hash: 5cedb800aa2d1c0307066db016d08c2d0c6ebf0bb047bfdc43e527596d441f0d
 
 name:           MartianRobot
 version:        0.1.0.0
 description:    Please see the README on GitHub at <https://github.com/githubuser/MartianRobot#readme>
-homepage:       https://github.com/githubuser/MartianRobot#readme
-bug-reports:    https://github.com/githubuser/MartianRobot/issues
+homepage:       https://github.com/sgtHoloToaster/MartianRobot#readme
+bug-reports:    https://github.com/sgtHoloToaster/MartianRobot/issues
 author:         Author name here
 maintainer:     example@example.com
 copyright:      2020 Author name here
@@ -52,6 +52,7 @@ test-suite MartianRobot-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
+      LibSpec
       Paths_MartianRobot
   hs-source-dirs:
       test
@@ -59,4 +60,5 @@ test-suite MartianRobot-test
   build-depends:
       MartianRobot
     , base >=4.7 && <5
+    , hspec ==2.*
   default-language: Haskell2010
