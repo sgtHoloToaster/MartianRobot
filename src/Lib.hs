@@ -17,4 +17,4 @@ parseCommand 'F' = Just MoveForward
 parseCommand _ = Nothing
 
 parseCommands :: String -> [Maybe Command]
-parseCommands _ = []
+parseCommands commands = map parseCommand commands
