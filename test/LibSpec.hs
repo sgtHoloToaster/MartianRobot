@@ -16,3 +16,6 @@ spec = do
 
     it "parses list of valid commands" $ do
       parseCommands "LFRFF" `shouldBe` [Just TurnLeft, Just MoveForward, Just TurnRight, Just MoveForward, Just MoveForward]
+
+    it "doesn't fall when encoutered an invalid command in a command list" $ do
+      parseCommands "LYkRFR" `shouldBe` [Just TurnLeft, Nothing, Nothing, Just TurnRight, Just MoveForward, Just TurnRight]
