@@ -1,7 +1,6 @@
-module Tests (spec) where
+module MartianRobotSpec(spec) where
 
 import Test.Hspec
-import MartianRobot
 
 spec :: Spec
 spec = do

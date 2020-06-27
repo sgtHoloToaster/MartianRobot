@@ -17,25 +17,25 @@ maintainer:          Edge769@yandex.ru
 build-type:          Simple
 -- extra-source-files:  CHANGELOG.md
 
-executable MartianRobot
-  main-is: Main.hs
+library
+  exposed-modules: MartianRobot
   -- other-modules:
   -- other-extensions:
+  ghc-options: -Wall
   build-depends: 
       base >=4.12 && <4.15
   hs-source-dirs: src
   default-language: Haskell2010
 
-test-suite MartianRobotTests
+test-suite spec
   type: exitcode-stdio-1.0
-  main-is: RunTests.hs
+  main-is: Spec.hs
   ghc-options: -Wall
   build-depends: 
-      MartianRobot
-    , base >=4.12 && <4.15
+      base >=4.12 && <4.15
     , hspec ==2.*
+    , MartianRobot
   hs-source-dirs: 
       tests
-    , src
   default-language: Haskell2010
   build-tool-depends: hspec-discover:hspec-discover == 2.*
