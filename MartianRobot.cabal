@@ -18,9 +18,24 @@ build-type:          Simple
 -- extra-source-files:  CHANGELOG.md
 
 executable MartianRobot
-  main-is:             Main.hs
+  main-is: Main.hs
   -- other-modules:
   -- other-extensions:
-  build-depends:       base >=4.12 && <4.15
-  hs-source-dirs:      src
-  default-language:    Haskell2010
+  build-depends: 
+      base >=4.12 && <4.15
+  hs-source-dirs: src
+  default-language: Haskell2010
+
+test-suite MartianRobotTests
+  type: exitcode-stdio-1.0
+  main-is: RunTests.hs
+  ghc-options: -Wall
+  build-depends: 
+      MartianRobot
+    , base >=4.12 && <4.15
+    , hspec ==2.*
+  hs-source-dirs: 
+      tests
+    , src
+  default-language: Haskell2010
+  build-tool-depends: hspec-discover:hspec-discover == 2.*
