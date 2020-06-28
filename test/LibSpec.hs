@@ -1,7 +1,7 @@
 module LibSpec (spec) where
 
 import Test.Hspec
-import Lib(parseCommand, parseCommands, Command(..), Direction(..), turnRight, turnLeft)
+import Lib(parseCommand, parseCommands, Command(..), Direction(..), turnRight, turnLeft, Position(..), moveForward)
 
 spec :: Spec
 spec = do
@@ -31,3 +31,9 @@ spec = do
       turnLeft West `shouldBe` South
       turnLeft South `shouldBe` East
       turnLeft East `shouldBe` North
+
+    it "changes coordinates by moving forward" $ do
+      moveForward Position { coordinates = (1, 1), direction = North } `shouldBe` (1, 2)
+      moveForward Position { coordinates = (1, 1), direction = East } `shouldBe` (2, 1)
+      moveForward Position { coordinates = (1, 1), direction = South } `shouldBe` (1, 0)
+      moveForward Position { coordinates = (1, 1), direction = West } `shouldBe` (0, 1)

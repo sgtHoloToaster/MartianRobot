@@ -5,6 +5,8 @@ module Lib (
   , Direction(..)
   , turnLeft
   , turnRight
+  , moveForward
+  , Position(..)
 ) where
 
 data Command = 
@@ -40,3 +42,12 @@ turnRight North = East
 turnRight East = South
 turnRight South = West
 turnRight West = North
+
+type Coordinates = (Int, Int)
+data Position = Position {
+    coordinates :: Coordinates
+  , direction :: Direction
+}
+
+moveForward :: Position -> Coordinates
+moveForward position = (0, 0)
