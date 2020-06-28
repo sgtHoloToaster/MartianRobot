@@ -47,10 +47,14 @@ type Coordinates = (Int, Int)
 data Position = Position {
     coordinates :: Coordinates
   , direction :: Direction
-}
+} deriving (Eq, Show)
 
-moveForward :: Position -> Coordinates
-moveForward Position { direction = North, coordinates = (x, y) } = (x, y + 1)
-moveForward Position { direction = East, coordinates = (x, y) } = (x + 1, y)
-moveForward Position { direction = South, coordinates = (x, y) } = (x, y - 1)
-moveForward Position { direction = West, coordinates = (x, y) } = (x - 1, y)
+moveForward :: Position -> Position
+moveForward Position { direction = North, coordinates = (x, y) } = 
+  Position { direction = North, coordinates = (x, y + 1) }
+moveForward Position { direction = East, coordinates = (x, y) } = 
+  Position { direction = East, coordinates = (x + 1, y) }
+moveForward Position { direction = South, coordinates = (x, y) } = 
+  Position { direction = South, coordinates = (x, y - 1) }
+moveForward Position { direction = West, coordinates = (x, y) } = 
+  Position { direction = West, coordinates = (x - 1, y) }
