@@ -20,20 +20,20 @@ spec = do
     it "doesn't fall when encoutered an invalid command in a command list" $ do
       parseCommands "LYkRFR" `shouldBe` [Just TurnLeft, Nothing, Nothing, Just TurnRight, Just MoveForward, Just TurnRight]
 
-    it "turns right" $ do
-      turnRight North `shouldBe` East
-      turnRight East `shouldBe` South
-      turnRight South `shouldBe` West
-      turnRight West `shouldBe` North
+    let initPosition direction = Position { coordinates = (1, 1), direction = direction } in do
+      it "turns right" $ do
+        let p = initPosition North in turnRight p `shouldBe` p { direction = East }
+        let p = initPosition East in turnRight p `shouldBe` p { direction = South }
+        let p = initPosition South in turnRight p `shouldBe` p { direction = West }
+        let p = initPosition West in turnRight p `shouldBe` p { direction = North }
 
-    it "turns left" $ do
-      turnLeft North `shouldBe` West
-      turnLeft West `shouldBe` South
-      turnLeft South `shouldBe` East
-      turnLeft East `shouldBe` North
+      it "turns left" $ do
+        let p = initPosition North in turnLeft p `shouldBe` p { direction = West }
+        let p = initPosition West in turnLeft p `shouldBe` p { direction = South }
+        let p = initPosition South in turnLeft p `shouldBe` p { direction = East }
+        let p = initPosition East in turnLeft p `shouldBe` p { direction = North }
 
-    it "changes coordinates by moving forward" $ do
-      let initPosition direction = Position { coordinates = (1, 1), direction = direction } in do
+      it "changes coordinates by moving forward" $ do
         let p = initPosition North in moveForward p `shouldBe` p { coordinates = (1, 2) }
         let p = initPosition East in moveForward p `shouldBe` p { coordinates = (2, 1) }
         let p = initPosition South in moveForward p `shouldBe` p { coordinates = (1, 0) }

@@ -31,17 +31,17 @@ data Direction =
   | West
   deriving (Show, Eq)
 
-turnLeft :: Direction -> Direction
-turnLeft North = West
-turnLeft West = South
-turnLeft South = East
-turnLeft East = North
+turnLeft :: Position -> Position
+turnLeft p@Position { direction = North } = p { direction = West }
+turnLeft p@Position { direction = West } = p { direction = South }
+turnLeft p@Position { direction = South } = p { direction = East }
+turnLeft p@Position { direction = East } = p { direction = North }
 
-turnRight :: Direction -> Direction
-turnRight North = East
-turnRight East = South
-turnRight South = West
-turnRight West = North
+turnRight :: Position -> Position
+turnRight p@Position { direction = North } = p { direction = East }
+turnRight p@Position { direction = East } = p { direction = South }
+turnRight p@Position { direction = South } = p { direction = West }
+turnRight p@Position { direction = West } = p { direction = North }
 
 type Coordinates = (Int, Int)
 data Position = Position {
