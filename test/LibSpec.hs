@@ -33,11 +33,8 @@ spec = do
       turnLeft East `shouldBe` North
 
     it "changes coordinates by moving forward" $ do
-      moveForward Position { coordinates = (1, 1), direction = North } 
-        `shouldBe` Position { coordinates = (1, 2), direction = North }
-      moveForward Position { coordinates = (1, 1), direction = East } 
-        `shouldBe` Position { coordinates = (2, 1), direction = East }
-      moveForward Position { coordinates = (1, 1), direction = South } 
-        `shouldBe` Position { coordinates = (1, 0), direction = South }
-      moveForward Position { coordinates = (1, 1), direction = West } 
-        `shouldBe` Position { coordinates = (0, 1), direction = West } 
+      let initPosition direction = Position { coordinates = (1, 1), direction = direction } in do
+        let p = initPosition North in moveForward p `shouldBe` p { coordinates = (1, 2) }
+        let p = initPosition East in moveForward p `shouldBe` p { coordinates = (2, 1) }
+        let p = initPosition South in moveForward p `shouldBe` p { coordinates = (1, 0) }
+        let p = initPosition West in moveForward p `shouldBe` p { coordinates = (0, 1) }

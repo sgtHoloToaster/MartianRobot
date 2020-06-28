@@ -50,11 +50,7 @@ data Position = Position {
 } deriving (Eq, Show)
 
 moveForward :: Position -> Position
-moveForward Position { direction = North, coordinates = (x, y) } = 
-  Position { direction = North, coordinates = (x, y + 1) }
-moveForward Position { direction = East, coordinates = (x, y) } = 
-  Position { direction = East, coordinates = (x + 1, y) }
-moveForward Position { direction = South, coordinates = (x, y) } = 
-  Position { direction = South, coordinates = (x, y - 1) }
-moveForward Position { direction = West, coordinates = (x, y) } = 
-  Position { direction = West, coordinates = (x - 1, y) }
+moveForward p@Position { direction = North, coordinates = (x, y) } = p { coordinates = (x, y + 1) }
+moveForward p@Position { direction = East, coordinates = (x, y) } = p { coordinates = (x + 1, y) }
+moveForward p@Position { direction = South, coordinates = (x, y) } = p { coordinates = (x, y - 1) }
+moveForward p@Position { direction = West, coordinates = (x, y) } = p { coordinates = (x - 1, y) }
