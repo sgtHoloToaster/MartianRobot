@@ -50,4 +50,7 @@ data Position = Position {
 }
 
 moveForward :: Position -> Coordinates
-moveForward position = (0, 0)
+moveForward Position { direction = North, coordinates = (x, y) } = (x, y + 1)
+moveForward Position { direction = East, coordinates = (x, y) } = (x + 1, y)
+moveForward Position { direction = South, coordinates = (x, y) } = (x, y - 1)
+moveForward Position { direction = West, coordinates = (x, y) } = (x - 1, y)
