@@ -30,7 +30,13 @@ data Direction =
   deriving (Show, Eq)
 
 turnLeft :: Direction -> Direction
-turnLeft _ = North
+turnLeft North = West
+turnLeft West = South
+turnLeft South = East
+turnLeft East = North
 
 turnRight :: Direction -> Direction
-turnRight _ = North
+turnRight North = East
+turnRight East = South
+turnRight South = West
+turnRight West = North

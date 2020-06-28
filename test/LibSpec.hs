@@ -21,13 +21,13 @@ spec = do
       parseCommands "LYkRFR" `shouldBe` [Just TurnLeft, Nothing, Nothing, Just TurnRight, Just MoveForward, Just TurnRight]
 
     it "turns right" $ do
-      turnRight North `shouldBe` West
-      turnRight West `shouldBe` South
-      turnRight South `shouldBe` East
-      turnRight East `shouldBe` North
+      turnRight North `shouldBe` East
+      turnRight East `shouldBe` South
+      turnRight South `shouldBe` West
+      turnRight West `shouldBe` North
 
     it "turns left" $ do
-      turnLeft North `shouldBe` East
-      turnLeft East `shouldBe` South
-      turnLeft South `shouldBe` West
-      turnLeft West `shouldBe` North
+      turnLeft North `shouldBe` West
+      turnLeft West `shouldBe` South
+      turnLeft South `shouldBe` East
+      turnLeft East `shouldBe` North
