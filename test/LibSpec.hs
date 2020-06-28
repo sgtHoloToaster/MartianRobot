@@ -1,7 +1,7 @@
 module LibSpec (spec) where
 
 import Test.Hspec
-import Lib(parseCommand, parseCommands, Command(..))
+import Lib(parseCommand, parseCommands, Command(..), Direction(..), turnRight, turnLeft)
 
 spec :: Spec
 spec = do
@@ -19,3 +19,15 @@ spec = do
 
     it "doesn't fall when encoutered an invalid command in a command list" $ do
       parseCommands "LYkRFR" `shouldBe` [Just TurnLeft, Nothing, Nothing, Just TurnRight, Just MoveForward, Just TurnRight]
+
+    it "turns right" $ do
+      turnRight North `shouldBe` West
+      turnRight West `shouldBe` South
+      turnRight South `shouldBe` East
+      turnRight East `shouldBe` North
+
+    it "turns left" $ do
+      turnLeft North `shouldBe` East
+      turnLeft East `shouldBe` South
+      turnLeft South `shouldBe` West
+      turnLeft West `shouldBe` North
