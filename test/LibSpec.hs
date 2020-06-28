@@ -1,7 +1,17 @@
 module LibSpec (spec) where
 
 import Test.Hspec
-import Lib(parseCommand, parseCommands, Command(..), Direction(..), turnRight, turnLeft, Position(..), moveForward, executeCommand)
+import Lib(
+    parseCommand
+  , parseCommands
+  , Command(..)
+  , Direction(..)
+  , turnRight
+  , turnLeft
+  , Position(..)
+  , moveForward
+  , executeCommands
+  , executeCommand)
 
 spec :: Spec
 spec = do
@@ -14,10 +24,10 @@ spec = do
       parseCommand 'R' `shouldBe` Just TurnRight
       parseCommand 'F' `shouldBe` Just MoveForward
 
-    it "parses list of valid commands" $ do
+    it "parses a set of valid commands" $ do
       parseCommands "LFRFF" `shouldBe` [Just TurnLeft, Just MoveForward, Just TurnRight, Just MoveForward, Just MoveForward]
 
-    it "doesn't fall when encoutered an invalid command in a command list" $ do
+    it "doesn't fall when encoutered an invalid command in a set of commands" $ do
       parseCommands "LYkRFR" `shouldBe` [Just TurnLeft, Nothing, Nothing, Just TurnRight, Just MoveForward, Just TurnRight]
 
     let initPosition direction = Position { coordinates = (1, 1), direction = direction } in do
@@ -40,11 +50,14 @@ spec = do
         let p = initPosition West in moveForward p `shouldBe` p { coordinates = (0, 1) }
 
       it "executes a TurnLeft command" $ do
-        let p = initPosition North in executeCommand TurnLeft p `shouldBe` p { direction = West }
+        let p = initPosition North in executeCommand p TurnLeft `shouldBe` p { direction = West }
 
       it "executes a TurnRight command" $ do
-        let p = initPosition North in executeCommand TurnRight p `shouldBe` p { direction = East }
+        let p = initPosition North in executeCommand p TurnRight `shouldBe` p { direction = East }
 
       it "executes a MoveForward command" $ do
-        let p = initPosition North in executeCommand MoveForward p `shouldBe` p { coordinates = (1, 2) }
+        let p = initPosition North in executeCommand p MoveForward `shouldBe` p { coordinates = (1, 2) }
 
+      it "executes a set of commands" $ do
+        let p = initPosition North in 
+          executeCommands p [MoveForward, TurnLeft, MoveForward, TurnRight] `shouldBe` p { coordinates = (0, 2) }

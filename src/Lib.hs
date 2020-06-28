@@ -8,6 +8,7 @@ module Lib (
   , moveForward
   , Position(..)
   , executeCommand
+  , executeCommands
 ) where
 
 data Command = 
@@ -56,7 +57,10 @@ moveForward p@Position { direction = East, coordinates = (x, y) } = p { coordina
 moveForward p@Position { direction = South, coordinates = (x, y) } = p { coordinates = (x, y - 1) }
 moveForward p@Position { direction = West, coordinates = (x, y) } = p { coordinates = (x - 1, y) }
 
-executeCommand :: Command -> Position -> Position
-executeCommand TurnLeft p = turnLeft p
-executeCommand TurnRight p = turnRight p
-executeCommand MoveForward p = moveForward p
+executeCommand :: Position -> Command -> Position
+executeCommand p TurnLeft = turnLeft p
+executeCommand p TurnRight= turnRight p
+executeCommand p MoveForward = moveForward p
+
+executeCommands :: Position -> [Command] -> Position
+executeCommands commands position = foldl executeCommand commands position
