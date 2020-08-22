@@ -9,6 +9,9 @@ module Lib (
   , Position(..)
   , executeCommand
   , executeCommands
+  , AreaSize(..)
+  , CommandExecutionResult(..)
+  , parseAndExecuteCommand
 ) where
 
 data Command = 
@@ -64,3 +67,27 @@ executeCommand p MoveForward = moveForward p
 
 executeCommands :: Position -> [Command] -> Position
 executeCommands commands position = foldl executeCommand commands position
+
+type AreaSize = (Int, Int)
+data CommandExecutionResult = CommandExecutionResult {
+    position :: Position
+  , outOfArea :: Bool
+} deriving (Eq, Show)
+
+applyCommandParsingResult :: Position -> Maybe Command -> Position
+applyCommandParsingResult position Nothing = position
+applyCommandParsingResult position (Just command) = executeCommand position command
+
+isOutOfArea :: AreaSize -> Position -> Bool
+isOutOfArea _ p@Position{ coordinates = (-1, _) } = True
+isOutOfArea _ p@Position{ coordinates = (_, -1) } = True
+isOutOfArea (ax, ay) p@Position{ coordinates = (px, py) } = ax < px || ay < py
+
+parseAndExecuteCommand :: AreaSize -> Position -> Char -> CommandExecutionResult
+parseAndExecuteCommand areaSize position rawCommand = 
+  let parsedCommand = parseCommand rawCommand in
+    let newPosition = applyCommandParsingResult position parsedCommand in
+      CommandExecutionResult { 
+        position = newPosition,
+        outOfArea = isOutOfArea areaSize newPosition
+      }
