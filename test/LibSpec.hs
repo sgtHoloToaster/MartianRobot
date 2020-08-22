@@ -69,7 +69,7 @@ spec = do
       it "changes coordinates when the correct command is provided" $ do
         let initPosition = Position { coordinates = (0, 0), direction = North } in
           parseAndExecuteCommand areaSize initPosition 'F' `shouldBe` CommandExecutionResult {
-            position = initPosition { coordinates = (1, 0) },
+            position = initPosition { coordinates = (0, 1) },
             isOutOfArea = False
           }
 
@@ -90,7 +90,7 @@ spec = do
       it "is out of the area when moves over the right border" $ do
         let initPosition = Position { coordinates = (0, 0), direction = East } in
           parseAndExecuteCommand areaSize initPosition 'F' `shouldBe` CommandExecutionResult {
-            position = initPosition { coordinates = (0, 1) },
+            position = initPosition { coordinates = (1, 0) },
             isOutOfArea = True
           }
         
