@@ -14,7 +14,8 @@ import Lib(
   , executeCommand
   , AreaSize(..)
   , CommandExecutionResult(..)
-  , parseAndExecuteCommand)
+  , parseAndExecuteCommand
+  , parseAndExecuteCommands)
 
 spec :: Spec
 spec = do
@@ -94,3 +95,28 @@ spec = do
             outOfArea = True
           }
         
+    let areaSize = (3,2) 
+    let initPosition = Position { coordinates = (0, 0), direction = North } in do
+      it "returns initial position when no commands are provided" $ do
+        parseAndExecuteCommands areaSize initPosition "" `shouldBe` CommandExecutionResult {
+          position = initPosition,
+          outOfArea = False
+        }
+
+      it "returns initial position when all provided commands are incorrect" $ do
+        parseAndExecuteCommands areaSize initPosition "TPMMN" `shouldBe` CommandExecutionResult {
+          position = initPosition,
+          outOfArea = False
+        }
+
+      it "returns the last coordinates where the robot fell out the area" $ do
+        parseAndExecuteCommands areaSize initPosition "FRFLFFFFFFLFLFFF" `shouldBe` CommandExecutionResult {
+          position = initPosition{ coordinates = (1, 3) },
+          outOfArea = True
+        }
+
+      it "returns the last coordinates where the robot stopped" $ do
+        parseAndExecuteCommands areaSize initPosition "FRFRFRF" `shouldBe` CommandExecutionResult {
+          position = Position{ coordinates = (0, 0), direction = West },
+          outOfArea = False
+        }

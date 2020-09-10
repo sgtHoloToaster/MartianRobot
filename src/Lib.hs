@@ -12,6 +12,7 @@ module Lib (
   , AreaSize(..)
   , CommandExecutionResult(..)
   , parseAndExecuteCommand
+  , parseAndExecuteCommands
 ) where
 
 data Command = 
@@ -91,3 +92,11 @@ parseAndExecuteCommand areaSize position rawCommand =
         position = newPosition,
         outOfArea = isOutOfArea areaSize newPosition
       }
+      
+parseAndExecuteCommands :: AreaSize -> Position -> String -> CommandExecutionResult
+parseAndExecuteCommands areaSize currentPosition "" = CommandExecutionResult { position = currentPosition, outOfArea = isOutOfArea areaSize currentPosition }
+parseAndExecuteCommands areaSize currentPosition (firstCommand:otherCommands) =
+  let result = parseAndExecuteCommand areaSize currentPosition firstCommand in do
+    if outOfArea result
+      then result
+      else parseAndExecuteCommands areaSize (position result) otherCommands
